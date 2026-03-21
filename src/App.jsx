@@ -1,17 +1,53 @@
-import HackTimer from "./components/HackTimer"
-import WhoamiProfile from "./components/WhoamiProfile"
+import { useEffect, useRef } from 'react'
+import HackTimer from './components/HackTimer'
+import WhoamiProfile from './components/WhoamiProfile'
 
 function App() {
+  const vantaRef = useRef(null);
+  const vantaEffectRef = useRef(null); 
+
+  useEffect(() => {
+    
+    if (!vantaEffectRef.current && vantaRef.current && window.VANTA.FOG) {
+      vantaEffectRef.current = window.VANTA.FOG({
+        el: vantaRef.current,
+        THREE: THREE,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        highlightColor: 0x004411,
+        midtoneColor: 0x002200,
+        lowlightColor: 0x000000,
+        baseColor: 0x000000,
+        blurFactor: 0.60,
+        speed: 0.80,
+        zoom: 1.00
+      });
+    }
+
+    
+    return () => {
+      if (vantaEffectRef.current) {
+        vantaEffectRef.current.destroy();
+        vantaEffectRef.current = null;
+      }
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-      <h1 className="text-green-500 text-4xl font-mono font-bold">
-        {"> TARGET ACQUIRED. AWAITING COMMANDS..."}
-      </h1>
+   
+    <div ref={vantaRef} className="min-h-screen flex flex-col items-center justify-center p-4 w-full h-full relative overflow-hidden bg-slate">
+      
+      <div className="absolute inset-0 bg-black/30 pointer-events-none z-0"></div>
 
-      <HackTimer />
-
-      <WhoamiProfile />
-
+      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
+        
+        <HackTimer />
+        
+        <WhoamiProfile />
+      </div>
     </div>
   )
 }
