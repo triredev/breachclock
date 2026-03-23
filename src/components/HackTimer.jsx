@@ -7,7 +7,6 @@ export default function HackTimer() {
   const [hasAborted, setHasAborted] = useState(false);
   const [phase, setPhase] = useState("FOCUS");
 
-  // 1. Calculamos el estado ACTUALIZADO al principio
   let currentStatus = "INITIAL";
   if (isActive) {
     currentStatus = "RUNNING";
@@ -17,7 +16,6 @@ export default function HackTimer() {
     currentStatus = "ABORTED";
   }
 
-  // 2. Variable que nos dice si el botón Abort debe estar bloqueado
   const isAbortDisabled = currentStatus === "INITIAL" || currentStatus === "ABORTED";
 
   useEffect(() => {
@@ -38,7 +36,7 @@ export default function HackTimer() {
   };
   
   const resetTimer = () => {
-    if (isAbortDisabled) return; // Protección extra
+    if (isAbortDisabled) return;
     setIsActive(false);
     setTimeLeft(25 * 60);
     setHasAborted(true);
@@ -50,11 +48,13 @@ export default function HackTimer() {
   return (
     <div className="flex flex-col items-center gap-8">
       
-      {(currentStatus === "RUNNING" || currentStatus === "PAUSED") && (
-        <h1 className="text-green-400 font-bold text-xl font-mono -mb-2 animate-pulse text-center tracking-wider drop-shadow-[0_0_8px_rgba(74,222,128,0.8)] uppercase">
-          &gt; CURRENT_PHASE: {phase}
-        </h1>
-      )}
+     <h1 
+        className={`text-green-400 font-bold text-xl font-mono -mb-2 animate-pulse text-center tracking-wider drop-shadow-[0_0_8px_rgba(74,222,128,0.8)] uppercase ${
+          currentStatus === "RUNNING" || currentStatus === "PAUSED" ? 'visible' : 'invisible'
+        }`}
+      >
+        &gt; CURRENT_PHASE: {currentStatus == "PAUSED" ? "PAUSED" : phase}
+      </h1>
 
       <div className="text-8xl font-mono font-bold text-green-500 tracking-widest drop-shadow-[0_0_15px_rgba(34,197,94,0.5)]">
         {minutes}:{seconds}
@@ -65,10 +65,13 @@ export default function HackTimer() {
           onClick={toggleTimer}
           className="px-6 py-3 border-2 border-green-500 text-green-500 font-mono font-bold hover:bg-green-500 hover:text-slate-950 transition-colors cursor-pointer"
         >
-          {isActive ? '[ PAUSE_ATTACK ]' : '[ EXECUTE_EXPLOIT ]'}
+          {currentStatus === "RUNNING" 
+            ? '[ PAUSE_BREACH ]' 
+            : currentStatus === "PAUSED" 
+              ? '[ RESUME_BREACH ]' 
+              : '[ START_BREACH ]'}
         </button>
         
-        {/* 🟢 Botón ABORT inteligente: Cambia su diseño si está bloqueado */}
         <button
           onClick={resetTimer}
           disabled={isAbortDisabled}

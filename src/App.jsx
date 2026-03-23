@@ -38,15 +38,16 @@ function App() {
 
   return (
    
-    <div ref={vantaRef} className="min-h-screen flex flex-col items-center justify-center p-4 w-full h-full relative overflow-hidden bg-slate">
+    <div ref={vantaRef} className="min-h-screen flex items-center justify-center p-4 w-full h-full relative overflow-hidden bg-black">
       
-      <div className="absolute inset-0 bg-black/30 pointer-events-none z-0"></div>
+      <div className="absolute inset-0 bg-black/50 pointer-events-none z-0"></div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
+      <div className="relative z-10 flex flex-col items-center justify-center w-[800px] h-[650px] max-w-full max-h-full bg-black/80 border border-green-500/30 rounded-xl shadow-[0_0_40px_rgba(0,0,0,0.8)] backdrop-blur-sm p-8">
         
         <HackTimer />
         
         <WhoamiProfile />
+
       </div>
     </div>
   )
