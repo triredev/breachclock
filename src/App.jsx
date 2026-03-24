@@ -50,7 +50,7 @@ function App() {
           onClick={() => setIsSettingsOpen(true)}
           className="absolute top-4 right-4 text-green-500/50 hover:text-green-400 font-mono text-sm tracking-wider hover:bg-green-900/30 px-3 py-1 border border-transparent hover:border-green-500/50 transition-all cursor-pointer z-20"
         >
-          [ CONFIG ]
+          [ config ]
         </button>
 
         <HackTimer />

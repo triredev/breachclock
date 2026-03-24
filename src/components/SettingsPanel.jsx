@@ -12,7 +12,7 @@ export default function SettingsPanel({ isOpen, onClose }) {
             onClick={onClose} 
             className="text-red-500 hover:text-red-400 hover:bg-red-900/30 px-2 transition-colors cursor-pointer"
           >
-            [X]
+            [x]
           </button>
         </div>
 

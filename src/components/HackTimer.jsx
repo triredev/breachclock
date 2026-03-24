@@ -49,11 +49,11 @@ export default function HackTimer() {
     <div className="flex flex-col items-center gap-8">
       
      <h1 
-        className={`text-green-400 font-bold text-xl font-mono -mb-2 animate-pulse text-center tracking-wider drop-shadow-[0_0_8px_rgba(74,222,128,0.8)] uppercase ${
+        className={`text-green-400 font-bold text-xl font-mono -mb-2 animate-pulse text-center tracking-wider drop-shadow-[0_0_8px_rgba(74,222,128,0.8)] lowercase ${
           currentStatus === "RUNNING" || currentStatus === "PAUSED" ? 'visible' : 'invisible'
         }`}
       >
-        &gt; CURRENT_PHASE: {currentStatus == "PAUSED" ? "PAUSED" : phase}
+        &gt; current_phase: {currentStatus == "PAUSED" ? "PAUSED" : phase}
       </h1>
 
       <div className="text-8xl font-mono font-bold text-green-500 tracking-widest drop-shadow-[0_0_15px_rgba(34,197,94,0.5)]">
@@ -66,10 +66,10 @@ export default function HackTimer() {
           className="px-6 py-3 border-2 border-green-500 text-green-500 font-mono font-bold hover:bg-green-500 hover:text-slate-950 transition-colors cursor-pointer"
         >
           {currentStatus === "RUNNING" 
-            ? '[ PAUSE_BREACH ]' 
+            ? '[ pause_breach ]' 
             : currentStatus === "PAUSED" 
-              ? '[ RESUME_BREACH ]' 
-              : '[ START_BREACH ]'}
+              ? '[ resume_breach ]' 
+              : '[ start_breach ]'}
         </button>
         
         <button
@@ -81,7 +81,7 @@ export default function HackTimer() {
               : 'border-red-500 text-red-500 hover:bg-red-500 hover:text-slate-950 cursor-pointer'
           }`}
         >
-          [ ABORT ]
+          [ abort ]
         </button>
       </div>
 
